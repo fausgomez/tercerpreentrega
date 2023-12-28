@@ -15,3 +15,6 @@ class Intereses(models.Model):
     animales = models.BooleanField()
     medioambiente = models.BooleanField()
     viajes = models.BooleanField()
+
+    def __str__(self):
+        return f"{self.nombre}, {self.apellido}"

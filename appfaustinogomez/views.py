@@ -17,3 +17,6 @@ def leer_datosdecontacto(request):
 def leer_intereser(request):
     return HttpResponse("Vista intereses")
 
+def index(request):
+    return render(request, 'index.html')
+
