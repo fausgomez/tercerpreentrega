@@ -2,20 +2,13 @@ from django.shortcuts import HttpResponse
 from django.shortcuts import render
 
 def leer_persona(request):
-    return HttpResponse("Vista Persona")
+    return render(request, 'persona.html')
 
 def leer_datosdecontacto(request):
-
-    contexto = {
-        "nombre" : "Pepe",
-        "apellido" : "Rodriguez",
-        "datos" : ['1122334455', 'pepe@gmail.com', 'Av. siempreviva 1234']
-    }
-
-    return  render(request, 'plantilla.html', contexto)
+    return render(request, 'datosdecontacto.html')
 
 def leer_intereser(request):
-    return HttpResponse("Vista intereses")
+    return render(request, 'intereses.html')
 
 def index(request):
     return render(request, 'index.html')

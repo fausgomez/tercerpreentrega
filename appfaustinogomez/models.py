@@ -4,6 +4,9 @@ class Persona(models.Model):
     nombre = models.CharField(max_length=20)
     apellido = models.CharField(max_length=20)
     dni = models.DecimalField(max_digits=10, decimal_places=0)
+    
+    def __str__(self):
+        return f"{self.nombre}, {self.apellido}"
 
 class DatosDeContacto(models.Model):
     telefono = models.DecimalField(max_digits=12, decimal_places=0)
@@ -15,6 +18,3 @@ class Intereses(models.Model):
     animales = models.BooleanField()
     medioambiente = models.BooleanField()
     viajes = models.BooleanField()
-
-    def __str__(self):
-        return f"{self.nombre}, {self.apellido}"
