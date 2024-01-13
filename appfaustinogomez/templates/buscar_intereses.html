@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2> Resultados del id {{id}}</h2>
+    {% for intereses in intereses%}
+    <h3>Intereses en autos:<li>{{intereses.autos}}</li></h3>
+    <h3>Intereses en el medioambiente:<li>{{intereses.medioambiente}}</li></h3>
+    <h3>Intereses en viajes:<li>{{intereses.viajes}}</li></h3>
+    <h3>Intereses en animales:<li>{{intereses.animales}}</li></h3>
+    {% endfor %}
+
+</body>
+</html>

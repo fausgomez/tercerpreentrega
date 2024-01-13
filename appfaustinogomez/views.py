@@ -21,43 +21,12 @@ def index(request):
     return render(request, 'index.html')
 
 
-"""
-def persona_formulario(request):
 
-    print(f"path: {request.path}")
-    print(f"full path: {request.get_full_path()}")
-    print(f"host: {request.get_host()}")
-    print(f"si es segura: {request.is_secure()}")
-    print(f"metodo: {request.method}")
-    ua = request.META.get("HTTP_USER_AGENT")
-    print(f"ua: {ua}")
-
-    if request.method == "POST":
-
-        nombre = request.POST.get("nombre")
-        apellido = request.POST.get("apellido")
-        dni = request.POST.get("dni")
-
-        print(f" el nombre es {nombre}, el apellido es {apellido} y su dni es {dni}")
-
-
-        persona = Persona(nombre=nombre, apellido=apellido, dni=dni)
-
-        persona.save()
-
-        return render(request, 'index.html')
-
-    return render(request, 'persona_formulario.html')
-
-"""
 def persona_formulario(request):
 
     if request.method == "POST":
 
         formulario = PersonaFormulario(request.POST)
-
-        #print("formulario")
-        #print(formulario)
 
         print(f" is valid: {formulario.is_valid}")
         if formulario.is_valid():
@@ -146,3 +115,110 @@ def intereses_formulario(request):
 
 
     return render(request, 'intereses_formulario.html', {"formulario": formulario})
+
+
+
+
+def busqueda_dni(request):
+
+    if request.method == "GET":
+
+        dni = request.GET.get("dni")
+        print(f"Vamos a buscar el dni: {dni}")
+
+
+
+    return render(request, 'busqueda_dni.html')
+
+
+def buscar_dni(request):
+
+    if request.method == "GET":
+
+        dni = request.GET.get("dni")
+
+        if dni is None:
+            return HttpResponse("Enviar el dni a buscar")
+        
+        #siguiente paso buscar los datos
+
+        persona = Persona.objects.filter(dni__icontains=dni)
+
+        contexto  = {
+            "persona": persona,
+            "dni": dni
+        }
+
+        return render(request, "buscar_dni.html", contexto)
+
+
+
+
+
+def busqueda_email(request):
+
+    if request.method == "GET":
+
+        email = request.GET.get("email")
+        print(f"Vamos a buscar el email: {email}")
+
+
+
+    return render(request, 'busqueda_email.html')
+
+
+
+def buscar_email(request):
+
+    if request.method == "GET":
+
+        email = request.GET.get("email")
+
+        if email is None:
+            return HttpResponse("Enviar el email a buscar")
+        
+        #siguiente paso buscar los datos
+
+        datos = DatosDeContacto.objects.filter(email__icontains=email)
+
+        contexto  = {
+            "datos": datos,
+            "email": email
+        }
+
+        return render(request, "buscar_email.html", contexto)
+    
+
+
+
+def busqueda_intereses(request):
+
+    if request.method == "GET":
+
+        id = request.GET.get("id")
+        print(f"Vamos a buscar el id: {id}")
+
+
+
+    return render(request, 'busqueda_intereses.html')
+
+
+def buscar_intereses(request):
+
+    if request.method == "GET":
+
+        id = request.GET.get("id")
+
+        if id is None:
+            return HttpResponse("Enviar el id a buscar")
+        
+        #siguiente paso buscar los datos
+
+        intereses = Intereses.objects.filter(id__icontains=id)
+
+        contexto  = {
+            "intereses": intereses,
+            "id": id
+        }
+
+        return render(request, "buscar_intereses.html", contexto)
